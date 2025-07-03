@@ -1,5 +1,6 @@
 import Welcome from "@/components/about/Welcome";
 import Spacer from "@/components/common/Spacer";
+import FeaturedCourses from "@/components/home/FeaturedCourses";
 import Slider from "@/components/home/Slider";
 
 export default function HomePage() {
@@ -9,6 +10,8 @@ export default function HomePage() {
       <Spacer />
       <Welcome />
       <Spacer />
+		<FeaturedCourses />
+		<Spacer />
     </>
   );
 }
