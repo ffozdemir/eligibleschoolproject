@@ -1,3 +1,6 @@
+import Footer from "@/components/common/footer/Footer";
+import MainMenuBar from "@/components/common/header/MainMenuBar";
+import Topbar from "@/components/common/header/Topbar";
 import { appConfig } from "@/helpers/config";
 import { montserrat } from "@/helpers/fonts";
 import "@/styles/index.scss";
@@ -13,7 +16,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={montserrat.variable}>
-      <body>{children}</body>
+      <body>
+        <Topbar />
+        <MainMenuBar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
