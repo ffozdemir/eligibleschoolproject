@@ -2,12 +2,14 @@
 import React from "react";
 import { Nav, Container, Navbar, Offcanvas } from "react-bootstrap";
 import Logo from "./Logo";
+import MainMenu from "./MainMenu";
+import ButtonCallNow from "./ButtonCallNow";
 
 const MainMenuBar = () => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary mb-3" sticky="top">
+    <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
       <Container>
-       <Logo/>
+        <Logo />
         <Navbar.Toggle aria-controls="main-menubar" />
         <Navbar.Offcanvas
           id="main-menubar"
@@ -18,11 +20,8 @@ const MainMenuBar = () => {
             <Offcanvas.Title id="main-menubar-title">Offcanvas</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link href="#action1">Home</Nav.Link>
-              <Nav.Link href="#action2">Link</Nav.Link>
-            </Nav>
-            Hello
+            <MainMenu className="justify-content-center flex-grow-1" />
+            <ButtonCallNow />
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>
