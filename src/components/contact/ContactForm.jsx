@@ -6,8 +6,8 @@ import "./contact-form.scss";
 const ContactForm = () => {
   return (
     <div>
-      <Form>
-        <Row>
+      <Form className="contact-form">
+        <Row className="g-3">
           <Col md={6}>
             <InputGroup className="mb-3">
               <InputGroup.Text id="name">
@@ -65,7 +65,7 @@ const ContactForm = () => {
           </Col>
         </Row>
         <Button type="submit" variant="outline-secondary">
-          Submit
+          <i className="pi pi-send"></i> Submit
         </Button>
       </Form>
     </div>
