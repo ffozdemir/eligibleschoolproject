@@ -1,5 +1,4 @@
-
-export {ValidationError as YupValidationError} from "yup";
+export { ValidationError as YupValidationError } from "yup";
 
 export const convertFormDataToJSON = (formData) => {
   return Object.fromEntries(formData);
@@ -12,6 +11,8 @@ export const response = (ok, message, errors) => {
     errors,
   };
 };
+
+export const initialState = response(false, "", {});
 
 export const transformYupErrors = (errors) => {
   const errObject = {};

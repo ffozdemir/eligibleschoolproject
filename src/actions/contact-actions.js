@@ -8,7 +8,6 @@ import {
 } from "@/helpers/form-validation";
 import { ContactSchema } from "@/helpers/schemas/contact-schema";
 import { createMessage } from "@/services/contact-service";
-import { transform } from "next/dist/build/swc/generated-native";
 
 export const createContactAction = async (prevState, formData) => {
   try {
@@ -17,7 +16,7 @@ export const createContactAction = async (prevState, formData) => {
     const res = await createMessage(fields);
     const data = await res.json();
     if (!res.ok) {
-      throw new Error(data.message || "Failed to create contact message");
+      return response(false, "", data?.validations);
     }
 
     //revalidation will be handled at the future
