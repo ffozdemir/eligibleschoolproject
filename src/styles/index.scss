@@ -1,3 +1,11 @@
 @import "./variables";
 @import "bootstrap/scss/bootstrap";
 @import "primeicons/primeicons.css";
+
+.content-section {
+  padding: 70px 0;
+
+  &.bg {
+    background-color: $color5;
+  }
+}
