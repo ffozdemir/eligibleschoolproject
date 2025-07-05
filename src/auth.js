@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { login } from "./services/auth-service";
+import { NextResponse } from "next/server";
 
 const authConfig = {
   providers: [
@@ -27,6 +28,19 @@ const authConfig = {
   callbacks: {
     // middleware to check if the user is authenticated
     authorized({ auth, request }) {
+      const { pathname, searchParams, origin } = request.nextUrl; //get the pathname from the request URL
+      const isLoggedIn = !!auth?.user; //check if the user is authenticated
+      const isInLoginPage = pathname.startsWith("/login"); //check if the user is in the login page
+      const isInDashboardPages = pathname.startsWith("/dashboard"); //check if the user is in the dashboard pages
+
+      if (isLoggedIn) {
+        if (isInLoginPage) {
+          const url = searchParams.get("callbackUrl") || `${origin}/dashboard`; //get the callback URL from the search params or the origin
+          return NextResponse.redirect(url); //if the user is authenticated and is in the login page, redirect to the dashboard
+        }
+      } else if (isInDashboardPages) {
+        return false; //if the user is not authenticated and is in the dashboard pages, return false
+      }
       return true;
     },
     //middleware to handle JWT token
