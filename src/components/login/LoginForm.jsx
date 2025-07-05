@@ -16,17 +16,21 @@ const LoginForm = () => {
           <Card>
             <Card.Body>
               <h4>Please enter zour username and password</h4>
-              {!state.ok && state.message && <Alert variant="danger">{state.message}</Alert>}
+              {!state.ok && state.message && (
+                <Alert variant="danger">{state.message}</Alert>
+              )}
               <Form action={formAction}>
                 <TextInput
                   label="Username"
                   name="username"
                   error={state?.errors?.username}
+                  initialValue="root"
                 />
                 <PasswordInput
                   label="Password"
                   name="password"
                   error={state?.errors?.password}
+                  initialValue="12345aA."
                 />
                 <SubmitButton title="Login" icon="sign-in" />
               </Form>

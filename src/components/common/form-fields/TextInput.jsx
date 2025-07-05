@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
-const TextInput = ({ label, error, className = "mb-3", ...rest }) => {
-  const [val, setVal] = useState("");
+const TextInput = ({ label, error, initialValue, className = "mb-3", ...rest }) => {
+  const [val, setVal] = useState(initialValue ?? "");
 
   return (
     <FormGroup className={className} controlId={rest.name}>

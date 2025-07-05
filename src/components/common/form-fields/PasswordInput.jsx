@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel, InputGroup } from "react-bootstrap";
 
 const PasswordInput = (props) => {
-  const { label, error, className = "mb-3", ...rest } = props;
+  const { label, error, initialValue, className = "mb-3", ...rest } = props;
 
   const [type, setType] = useState("password");
-  const [val, setVal] = useState("");
+  const [val, setVal] = useState(initialValue ?? "");
 
   const handleClick = () => {
     setType((prev) => (prev === "password" ? "text" : "password"));

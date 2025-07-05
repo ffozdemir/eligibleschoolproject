@@ -25,9 +25,25 @@ const authConfig = {
     }),
   ],
   callbacks: {
+    // middleware to check if the user is authenticated
     authorized({ auth, request }) {
       return true;
     },
+    //middleware to handle JWT token
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    //middleware to handle session
+    async session({ session, token }) {
+      const { accessToken, user } = token;
+
+      session.user = user; //set the user data in the session
+      session.accessToken = accessToken; //set the access token in the session
+      return session; //return the session
+    },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 
