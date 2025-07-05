@@ -10,8 +10,8 @@ import { ContactSchema } from "@/helpers/schemas/contact-schema";
 import { createMessage } from "@/services/contact-service";
 
 export const createContactAction = async (prevState, formData) => {
+  const fields = convertFormDataToJSON(formData);
   try {
-    const fields = convertFormDataToJSON(formData);
     ContactSchema.validateSync(fields, { abortEarly: false });
     const res = await createMessage(fields);
     const data = await res.json();
