@@ -17,7 +17,7 @@ const SubmitButton = ({
       size="lg"
       className={`d-flex align-items-center justify-content-center ${className}`}
       disabled={pending}
-      variant="secondary"
+      variant="primary"
       {...rest}
     >
       {pending ? (

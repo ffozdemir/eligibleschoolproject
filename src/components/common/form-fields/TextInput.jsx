@@ -2,25 +2,13 @@
 import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 
-const TextInput = ({
-  label,
-  error,
-  initialValue,
-  className = "mb-3",
-  ...rest
-}) => {
-  const [val, setVal] = useState(initialValue ?? "");
+const TextInput = (props) => {
+  const { label, error, className = "mb-3", ...rest } = props;
 
   return (
     <FormGroup className={className} controlId={rest.name}>
       <FormLabel>{label}</FormLabel>
-      <FormControl
-        isInvalid={!!error}
-        size="lg"
-        value={val}
-        onChange={(e) => setVal(e.target.value)}
-        {...rest}
-      />
+      <FormControl isInvalid={!!error} size="lg" {...rest} />
       <FormControl.Feedback type="invalid">{error}</FormControl.Feedback>
     </FormGroup>
   );

@@ -32,7 +32,7 @@ const DateInput = (props) => {
         isInvalid={!!error}
         size="lg"
         as={Calendar}
-        value={val}
+        value={val || ""}
         onChange={(e) => setVal(e.value)}
         {...rest}
       />

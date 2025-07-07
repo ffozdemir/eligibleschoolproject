@@ -18,7 +18,7 @@ export const createAdminAction = async (prevState, formData) => {
     const data = await createAdmin(fields);
     const res = await data.json();
     if (!res.ok) {
-      return response(false, "", data?.message || "Failed to create admin");
+      return response(false, data?.message || "Failed to create admin");
     }
     //REVALIDATION
     return response(true, data?.message || "Admin created successfully");
