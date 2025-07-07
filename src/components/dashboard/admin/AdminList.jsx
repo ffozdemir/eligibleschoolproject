@@ -3,17 +3,41 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { useRouter } from "next/navigation";
+import DataListHeader from "../common/DataListHeader";
 
 const AdminList = ({ data }) => {
-  const { content } = data;
+  const { content, totalElements, pageable, size } = data;
+  const { offset } = pageable;
+  const router = useRouter();
+
+  const header = (
+    <DataListHeader title="Admins" targetUrl="/dashboard/admin/new" />
+  );
+
+  const onPage = (e) => {
+    router.push(`/dashboard/admin?page=${e.page}`);
+  };
+
   return (
     <Container>
       <DataTable
+        dataKey="id"
+        lazy
         value={content}
-        tableStyle={{ minWidth: "50rem" }}
         showGridlines
         stripedRows
+        paginator
+        rows={size}
+        totalRecords={totalElements}
+        first={offset}
+        onPage={onPage}
+        header={header}
       >
+        <Column
+          header="#"
+          body={(row, options) => options.rowIndex + 1}
+        ></Column>
         <Column field="name" header="First Name"></Column>
         <Column field="surname" header="Lastname"></Column>
         <Column field="username" header="User Name"></Column>
