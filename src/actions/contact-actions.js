@@ -16,15 +16,15 @@ export const createContactAction = async (prevState, formData) => {
     const res = await createMessage(fields);
     const data = await res.json();
     if (!res.ok) {
-      return response(false, "", data?.validations);
+      return response(false, fields, "", data?.validations);
     }
 
     //revalidation will be handled at the future
 
-    return response(true, "Contact message created successfully", null);
+    return response(true, fields, "Contact message created successfully", null);
   } catch (error) {
     if (error instanceof YupValidationError) {
-      return transformYupErrors(error.inner);
+      return transformYupErrors(error.inner , fields);
     }
     throw error;
   }

@@ -24,13 +24,13 @@ const LoginForm = () => {
                   label="Username"
                   name="username"
                   error={state?.errors?.username}
-                  initialValue="root"
+                  defaultValue={state.data.username ?? "root"}
                 />
                 <PasswordInput
                   label="Password"
                   name="password"
                   error={state?.errors?.password}
-                  initialValue="12345aA."
+                  defaultValue={state.data.password ?? "12345aA."}
                 />
                 <SubmitButton title="Login" icon="sign-in" />
               </Form>
