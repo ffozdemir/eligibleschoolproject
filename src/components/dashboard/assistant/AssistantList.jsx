@@ -6,23 +6,23 @@ import { Column } from "primereact/column";
 import { useRouter } from "next/navigation";
 import DataListHeader from "../common/DataListHeader";
 import DataListToolbar from "../common/DataListToolbar";
-import { deleteManagerAction } from "@/actions/manager-action";
+import { deleteAssistantAction } from "@/actions/assistant-action";
 
-const ManagerList = ({ data }) => {
+const AssistantList = ({ data }) => {
   const { content, totalElements, pageable, size } = data;
   const { offset } = pageable;
   const router = useRouter();
-  const pagePath = "/dashboard/manager";
+  const pagePath = "/dashboard/assistant-manager";
 
   const toolbar = (row) => (
     <DataListToolbar
-      deleteAction={deleteManagerAction}
+      deleteAction={deleteAssistantAction}
       id={row.userId}
-      editUrl={`/dashboard/manager/${row.userId}`}
+      editUrl={`${pagePath}/${row.userId}`}
     />
   );
   const header = (
-    <DataListHeader title="Managers" targetUrl={`${pagePath}/new`} />
+    <DataListHeader title="Assistants" targetUrl={`${pagePath}/new`} />
   );
 
   const onPage = (e) => {
@@ -71,4 +71,4 @@ const ManagerList = ({ data }) => {
   );
 };
 
-export default ManagerList;
+export default AssistantList;

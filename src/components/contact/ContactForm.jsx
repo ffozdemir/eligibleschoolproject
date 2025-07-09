@@ -7,7 +7,6 @@ import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 
 const ContactForm = () => {
-  
   const [state, formAction] = useActionState(createContactAction, initialState);
 
   const refForm = useRef(null);
