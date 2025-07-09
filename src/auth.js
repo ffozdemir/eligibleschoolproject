@@ -66,6 +66,7 @@ const authConfig = {
   pages: {
     signIn: "/login",
   },
+  trustHost: true, // if you are using a custom domain, set this to true
 };
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authConfig);

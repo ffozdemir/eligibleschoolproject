@@ -12,16 +12,17 @@ const AdminList = ({ data }) => {
   const { content, totalElements, pageable, size } = data;
   const { offset } = pageable;
   const router = useRouter();
+  const pagePath = "/dashboard/admin";
 
   const toolbar = (row) => (
     <DataListToolbar deleteAction={deleteAdminAction} id={row.id} />
   );
   const header = (
-    <DataListHeader title="Admins" targetUrl="/dashboard/admin/new" />
+    <DataListHeader title="Admins" targetUrl={`${pagePath}/new`} />
   );
 
   const onPage = (e) => {
-    router.push(`/dashboard/admin?page=${e.page}`);
+    router.push(`${pagePath}?page=${e.page}`);
   };
 
   return (
@@ -42,15 +43,25 @@ const AdminList = ({ data }) => {
         <Column
           header="#"
           body={(row, options) => options.rowIndex + 1}
-        ></Column>
+          headerStyle={{ width: "20px" }}
+          bodyClassName="index"
+        />
         <Column
           field="name"
           header="First Name"
-          headerStyle={{ width: "50px" }}
+          bodyClassName="First Name"
         ></Column>
-        <Column field="surname" header="Lastname"></Column>
-        <Column field="username" header="User Name"></Column>
-        <Column header="" body={toolbar}></Column>
+        <Column
+          field="surname"
+          header="Last Name"
+          bodyClassName="Last Name"
+        ></Column>
+        <Column
+          field="username"
+          header="User Name"
+          bodyClassName="User Name"
+        ></Column>
+        <Column header="" body={toolbar} />
       </DataTable>
     </Container>
   );
