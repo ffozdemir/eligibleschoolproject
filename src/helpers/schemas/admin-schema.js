@@ -16,7 +16,7 @@ export const adminSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   surname: Yup.string().required("Surname is required"),
   phoneNumber: Yup.string()
-    .matches(/^\d{3}-\d{3}-d{4}$/, "Phone number must be 10 digits")
+    .matches(/^\d{3}-\d{3}-\d{4}$/, "Phone number must be 10 digits")
     .required("Phone number is required"),
   ssn: Yup.string()
     .matches(/^\d{3}-\d{2}-\d{4}$/, "SSN must be in the format XXX-XX-XXXX")

@@ -3,6 +3,7 @@ import { Calendar } from "primereact/calendar";
 import React, { useEffect, useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import "./date-input.scss";
+import { convertTimeToDateTime, isTimeValid } from "@/helpers/date-time";
 
 const DateInput = (props) => {
   const {
@@ -32,7 +33,7 @@ const DateInput = (props) => {
         isInvalid={!!error}
         size="lg"
         as={Calendar}
-        value={val || ""}
+        value={val}
         onChange={(e) => setVal(e.value)}
         {...rest}
       />

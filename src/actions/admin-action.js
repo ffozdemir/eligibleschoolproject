@@ -8,37 +8,43 @@ import {
 } from "@/helpers/form-validation";
 import { adminSchema } from "@/helpers/schemas/admin-schema";
 import { createAdmin, deleteAdmin } from "@/services/admin-service";
+import { revalidatePath } from "next/cache";
 
 export const createAdminAction = async (prevState, formData) => {
+  const fields = convertFormDataToJSON(formData);
+
   try {
-    const fields = convertFormDataToJSON(formData);
-    adminSchema.validateSync(fields, {
-      abortEarly: false,
-    });
-    const data = await createAdmin(fields);
-    const res = await data.json();
+    adminSchema.validateSync(fields, { abortEarly: false });
+
+    const res = await createAdmin(fields);
+    const data = await res.json();
+
     if (!res.ok) {
-      return response(false, data?.message || "Failed to create admin");
+      return response(false, fields, data?.message, data?.validations);
     }
-    //REVALIDATION
-    return response(true, data?.message || "Admin created successfully");
-  } catch (error) {
-    if (error instanceof YupValidationError) {
-      return transformYupErrors(error.inner);
+
+    revalidatePath("/dashboard/admin");
+    return response(true, fields, data?.message);
+  } catch (err) {
+    if (err instanceof YupValidationError) {
+      return transformYupErrors(err.inner, fields);
     }
-    throw error;
+
+    throw err;
   }
 };
 
 export const deleteAdminAction = async (id) => {
-  if (!id) {
-    throw new Error("Admin ID is required for deletion");
-  }
+  if (!id) throw new Error("Id is missing");
+
   const res = await deleteAdmin(id);
   const data = await res.text();
+
   if (!res.ok) {
-    return response(false, data || "Failed to delete admin");
+    return response(false, {}, "User could not be deleted");
   }
-  //revalidate
-  return response(true, data || "Admin deleted successfully");
+
+  revalidatePath("/dashboard/admin");
+
+  return response(true, {}, data);
 };
