@@ -53,12 +53,6 @@ const LessonList = ({ data }) => {
           headerStyle={{ width: "20px" }}
           bodyClassName="index"
         />
-        <Column
-          header="#"
-          body={(row, options) => options.rowIndex + 1}
-          headerStyle={{ width: "20px" }}
-          bodyClassName="index"
-        />
         <Column field="lessonName" header="Name" bodyClassName="Name"></Column>
         <Column
           field="creditScore"

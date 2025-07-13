@@ -35,3 +35,16 @@ export const LESSON_GET_ALL_BY_PAGE_API_ROUTE = `${appConfig.apiURL}/lessons/sea
 export const LESSON_GET_ALL_API_ROUTE = `${appConfig.apiURL}/lessons/getAll`;
 export const LESSON_CREATE_API_ROUTE = `${appConfig.apiURL}/lessons/save`;
 export const LESSON_DELETE_API_ROUTE = `${appConfig.apiURL}/lessons/delete`;
+
+//Program API Routes
+export const PROGRAM_GET_ALL_BY_PAGE_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/search`;
+export const PROGRAM_GET_ALL_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/getAll`;
+export const PROGRAM_GET_BY_ID_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/getById`;
+export const PROGRAM_GET_ASSIGNED_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/getAllAssigned`;
+export const PROGRAM_GET_UNASSIGNED_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/getAllUnassigned`;
+export const PROGRAM_GET_BY_TEACHER_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/getAllLessonProgramByTeacher`;
+export const PROGRAM_GET_BY_STUDENT_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/getAllLessonProgramByStudent`;
+
+// Program Service API Routes
+export const PROGRAM_CREATE_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/save`;
+export const PROGRAM_DELETE_API_ROUTE = `${appConfig.apiURL}/lessonPrograms/delete`;

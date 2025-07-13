@@ -58,14 +58,17 @@ const TermList = ({ data }) => {
         <Column
           body={(row) => formatDate(row.startDate)}
           header="Start Date"
+          bodyClassName="Start Date"
         ></Column>
         <Column
           body={(row) => formatDate(row.endDate)}
           header="End Date"
+          bodyClassName="End Date"
         ></Column>
         <Column
           body={(row) => formatDate(row.lastRegistrationDate)}
           header="Last Registration Date"
+          bodyClassName="Last Registration Date"
         ></Column>
         <Column header="" body={toolbar} />
       </DataTable>
