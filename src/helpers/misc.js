@@ -6,7 +6,23 @@ export const getGenderValues = () =>
 export const getTermValues = () =>
   appConfig.educationTerms.map((item) => item.value);
 
+export const getDayValues = () => appConfig.days.map((item) => item.value);
+
+export const getDayLabel = (value) => {
+  const day = appConfig.days.find((item) => item.value === value);
+  return day?.label;
+};
+
 export const getTermLabel = (value) => {
   const term = appConfig.educationTerms.find((item) => item.value === value);
   return term?.label;
+};
+
+export const isStringArray = (str) => {
+  try {
+    const arr = JSON.parse(str);
+    return Array.isArray(arr) && arr.length > 0;
+  } catch {
+    return false;
+  }
 };
