@@ -8,6 +8,7 @@ import {
 } from "@/components/common/form-fields";
 import BackButton from "@/components/common/form-fields/BackButton";
 import MultipleSelectInput from "@/components/common/form-fields/MultipleSelectInput";
+import { appConfig } from "@/helpers/config";
 
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
@@ -35,13 +36,15 @@ const ProgramCreateForm = ({ terms, lessons }) => {
     <FormContainer>
       <Form action={formAction}>
         <MultipleSelectInput
-          name="lessonIdList"
+          id="lessonIdList"
+          name="abc"
           label="Lessons"
           error={state?.errors?.lessonIdList}
           options={lessons}
           optionLabel="lessonName"
           optionValue="lessonId"
         />
+
         <SelectInput
           name="educationTermId"
           label="Education Term"
@@ -51,6 +54,16 @@ const ProgramCreateForm = ({ terms, lessons }) => {
           optionValue="value"
           defaultValue={state?.data?.educationTermId ?? ""}
           key={`educationTermId-${isLoading}`}
+        />
+        <SelectInput
+          name="day"
+          label="Day"
+          error={state?.errors?.day}
+          options={appConfig.days}
+          optionLabel="label"
+          optionValue="value"
+          defaultValue={state?.data?.day ?? ""}
+          key={`day-${isLoading}`}
         />
 
         <DateInput

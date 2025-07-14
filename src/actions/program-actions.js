@@ -9,7 +9,6 @@ import {
 import { programSchema } from "@/helpers/schemas/program-schema";
 import { createProgram, deleteProgram } from "@/services/program-service";
 
-
 import { revalidatePath } from "next/cache";
 
 export const createProgramAction = async (prevState, formData) => {
@@ -18,7 +17,12 @@ export const createProgramAction = async (prevState, formData) => {
   try {
     programSchema.validateSync(fields, { abortEarly: false });
 
-    const res = await createProgram(fields);
+    const payload = {
+      ...fields,
+      lessonIdList: JSON.parse(fields.lessonIdList),
+    };
+
+    const res = await createProgram(payload);
     const data = await res.json();
 
     if (!res.ok) {
