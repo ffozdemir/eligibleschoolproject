@@ -7,6 +7,7 @@ import {
   SubmitButton,
 } from "@/components/common/form-fields";
 import BackButton from "@/components/common/form-fields/BackButton";
+import MultipleSelectInput from "@/components/common/form-fields/MultipleSelectInput";
 
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
@@ -14,7 +15,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useActionState } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-const ProgramCreateForm = ({ terms }) => {
+const ProgramCreateForm = ({ terms, lessons }) => {
   const [state, formAction, isLoading] = useActionState(
     createProgramAction,
     initialState
@@ -33,6 +34,14 @@ const ProgramCreateForm = ({ terms }) => {
   return (
     <FormContainer>
       <Form action={formAction}>
+        <MultipleSelectInput
+          name="lessonIdList"
+          label="Lessons"
+          error={state?.errors?.lessonIdList}
+          options={lessons}
+          optionLabel="lessonName"
+          optionValue="lessonId"
+        />
         <SelectInput
           name="educationTermId"
           label="Education Term"
