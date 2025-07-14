@@ -1,6 +1,6 @@
 "use client";
 
-import { updateTeacherAction } from "@/actions/teacher-action";
+import { createTeacherAction } from "@/actions/teacher-action";
 import {
   FormContainer,
   TextInput,
@@ -15,15 +15,16 @@ import CheckInput from "@/components/common/form-fields/CheckInput";
 import MultipleSelectInput from "@/components/common/form-fields/MultipleSelectInput";
 
 import { appConfig } from "@/helpers/config";
+import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useActionState } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
+const StudentCreateForm = ({ programs }) => {
   const [state, formAction, isLoading] = useActionState(
-    updateTeacherAction,
-    { data: user } // Initialize with user data
+    createTeacherAction,
+    initialState
   );
   const router = useRouter();
 
@@ -39,7 +40,6 @@ const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
   return (
     <FormContainer>
       <Form action={formAction}>
-        <input type="hidden" name="id" value={user.id} />
         <TextInput
           label="First Name"
           name="name"
@@ -91,8 +91,7 @@ const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
           label="Is advisor teacher?"
           name="isAdvisorTeacher"
           type="checkbox"
-          defaultChecked={state?.data?.isAdvisorTeacher ?? "true"}
-          value="true"
+          defaultValue={state?.data?.isAdvisorTeacher ?? "true"}
         />
 
         <MultipleSelectInput
@@ -103,7 +102,6 @@ const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
           options={programs}
           optionLabel="label"
           optionValue="value"
-          values={teacherProgramIdList}
         />
 
         <MaskedInput
@@ -145,11 +143,11 @@ const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
 
         <ButtonGroup className="w-100">
           <BackButton />
-          <SubmitButton title="Update" />
+          <SubmitButton title="Create" />
         </ButtonGroup>
       </Form>
     </FormContainer>
   );
 };
 
-export default TeacherEditForm;
+export default StudentCreateForm;

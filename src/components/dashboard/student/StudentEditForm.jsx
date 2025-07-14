@@ -1,5 +1,6 @@
 "use client";
 
+import { updateStudentAction } from "@/actions/student-action";
 import { updateTeacherAction } from "@/actions/teacher-action";
 import {
   FormContainer,
@@ -20,9 +21,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useActionState } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
+const StudentEditForm = ({ user, programs, teacherProgramIdList }) => {
   const [state, formAction, isLoading] = useActionState(
-    updateTeacherAction,
+    updateStudentAction,
     { data: user } // Initialize with user data
   );
   const router = useRouter();
@@ -31,7 +32,7 @@ const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
     if (state?.message) {
       swAlert(state.message, state.ok ? "success" : "error");
       if (state.ok) {
-        router.push("/dashboard/teacher");
+        router.push("/dashboard/student");
       }
     }
   }, [state]);
@@ -152,4 +153,4 @@ const TeacherEditForm = ({ user, programs, teacherProgramIdList }) => {
   );
 };
 
-export default TeacherEditForm;
+export default StudentEditForm;
