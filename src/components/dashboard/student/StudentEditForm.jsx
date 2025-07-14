@@ -1,7 +1,6 @@
 "use client";
 
 import { updateStudentAction } from "@/actions/student-action";
-import { updateTeacherAction } from "@/actions/teacher-action";
 import {
   FormContainer,
   TextInput,
@@ -10,10 +9,8 @@ import {
   MaskedInput,
   PasswordInput,
   SubmitButton,
+  BackButton,
 } from "@/components/common/form-fields";
-import BackButton from "@/components/common/form-fields/BackButton";
-import CheckInput from "@/components/common/form-fields/CheckInput";
-import MultipleSelectInput from "@/components/common/form-fields/MultipleSelectInput";
 
 import { appConfig } from "@/helpers/config";
 import { swAlert } from "@/helpers/swal";
@@ -21,7 +18,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useActionState } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-const StudentEditForm = ({ user, programs, teacherProgramIdList }) => {
+const StudentEditForm = ({ user, teachers }) => {
   const [state, formAction, isLoading] = useActionState(
     updateStudentAction,
     { data: user } // Initialize with user data
@@ -88,23 +85,15 @@ const StudentEditForm = ({ user, programs, teacherProgramIdList }) => {
           defaultValue={state?.data?.email ?? ""}
         />
 
-        <CheckInput
-          label="Is advisor teacher?"
-          name="isAdvisorTeacher"
-          type="checkbox"
-          defaultChecked={state?.data?.isAdvisorTeacher ?? "true"}
-          value="true"
-        />
-
-        <MultipleSelectInput
-          id="lessonsIdList"
-          name="abc"
-          label="Programs"
-          error={state?.errors?.lessonsIdList}
-          options={programs}
+        <SelectInput
+          name="advisorTeacherId"
+          label="Advisor"
+          error={state?.errors?.advisorTeacherId}
+          options={teachers}
           optionLabel="label"
           optionValue="value"
-          values={teacherProgramIdList}
+          defaultValue={state?.data?.advisorTeacherId ?? ""}
+          key={`advisorTeacherId-${isLoading}`}
         />
 
         <MaskedInput
@@ -121,6 +110,20 @@ const StudentEditForm = ({ user, programs, teacherProgramIdList }) => {
           error={state?.errors?.ssn}
           mask="999-99-9999"
           value={state?.data?.ssn ?? ""}
+        />
+
+        <TextInput
+          label="Father Name"
+          name="fatherName"
+          error={state?.errors?.fatherName}
+          defaultValue={state?.data?.fatherName ?? ""}
+        />
+
+        <TextInput
+          label="Mother Name"
+          name="motherName"
+          error={state?.errors?.motherName}
+          defaultValue={state?.data?.motherName ?? ""}
         />
 
         <TextInput

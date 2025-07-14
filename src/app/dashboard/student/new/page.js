@@ -1,26 +1,25 @@
 import PageHeader from "@/components/common/PageHeader";
 import Spacer from "@/components/common/Spacer";
-import TeacherCreateForm from "@/components/dashboard/teacher/TeacherCreateForm";
-import { getUnAssignedPrograms } from "@/services/program-service";
+import StudentCreateForm from "@/components/dashboard/student/StudentCreateForm";
+
+import { getAllAdvisorTeachers } from "@/services/teacher-service";
 
 import React from "react";
 
 const Page = async () => {
-  const res = await getUnAssignedPrograms();
+  const res = await getAllAdvisorTeachers();
   const data = await res.json();
 
-  if (!res.ok) throw new Error(data?.message || "Failed to fetch programs");
-
-  const programs = data.map((item) => ({
-    value: item.lessonProgramId,
-    label: item.lessonName.map((lesson) => lesson.lessonName).join(", "),
+  const teachers = data.map((item) => ({
+    value: item.advisorTeacherId,
+    label: `${item.teacherName} ${item.teacherSurname}`,
   }));
 
   return (
     <>
-      <PageHeader title="New Teacher" />
+      <PageHeader title="New Student" />
       <Spacer />
-      <TeacherCreateForm programs={programs} />
+      <StudentCreateForm teachers={teachers} />
       <Spacer />
     </>
   );
