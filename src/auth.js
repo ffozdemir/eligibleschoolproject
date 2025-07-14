@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { login } from "./services/auth-service";
 import { NextResponse } from "next/server";
-import { getIsTokenValid } from "./helpers/auth-helper";
+import { getIsTokenValid, getIsUserAuthorized } from "./helpers/auth-helper";
 
 const authConfig = {
   providers: [
@@ -30,7 +30,8 @@ const authConfig = {
     // middleware to check if the user is authenticated
     authorized({ auth, request }) {
       const { pathname, searchParams, origin } = request.nextUrl; //get the pathname from the request URL
-      const isLoggedIn = !!auth?.user; //check if the user is authenticated
+      const userRole = auth?.user?.role;
+      const isLoggedIn = !!userRole; //check if the user is authenticated
       const isInLoginPage = pathname.startsWith("/login"); //check if the user is in the login page
       const isInDashboardPages = pathname.startsWith("/dashboard"); //check if the user is in the dashboard pages
       const isAPITokenValid = getIsTokenValid(auth?.accessToken); //check if the access token is valid
@@ -39,9 +40,16 @@ const authConfig = {
         if (isInLoginPage) {
           const url = searchParams.get("callbackUrl") || `${origin}/dashboard`; //get the callback URL from the search params or the origin
           return NextResponse.redirect(url); //if the user is authenticated and is in the login page, redirect to the dashboard
+        } else if (isInDashboardPages) {
+          const isUserAuthorized = getIsUserAuthorized(userRole, pathname); //check if the user is authorized to access the dashboard pages
+          if (!isUserAuthorized) {
+            const url = `${origin}/unauthorized`;
+            return NextResponse.redirect(url); //if the user is not authorized, redirect to the unauthorized page
+          }
         }
       } else if (isInDashboardPages) {
-        return false; //if the user is not authenticated and is in the dashboard pages, return false
+        NextResponse.redirect(`${origin}/login?callbackUrl=${pathname}`); //if the user is not authenticated and is in the dashboard pages, redirect to the login page with the callback URL
+        return false;
       }
       return true;
     },

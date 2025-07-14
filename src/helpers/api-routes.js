@@ -1,6 +1,8 @@
 import { appConfig } from "./config";
 
+// Contact Messages API Routes
 export const CONTACT_CREATE_API_ROUTE = `${appConfig.apiURL}/contactMessages/save`;
+export const CONTACT_GET_ALL_BY_PAGE_API_ROUTE = `${appConfig.apiURL}/contactMessages/getAll`;
 
 export const LOGIN_API_ROUTE = `${appConfig.apiURL}/auth/login`;
 

@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { appConfig } from "./config";
 
 export const getAuthHeader = async () => {
   const session = await auth();
@@ -32,5 +33,16 @@ export const getIsTokenValid = (token) => {
   const jwtExpireDateTime = new Date(jwtExpireTimeStamp * 1000); // Convert to milliseconds
 
   return jwtExpireDateTime > new Date(); // Check if the token is still valid
+};
 
+export const getIsUserAuthorized = (role, targetPath) => {
+  if (!role || !targetPath) return false;
+
+  const userRight = appConfig.userRightsOnRoutes.find((item) =>
+    item.urlRegex.test(targetPath)
+  );
+
+  if (!userRight) return false;
+
+  return userRight.roles.includes(role);
 };
