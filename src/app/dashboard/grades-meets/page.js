@@ -1,5 +1,7 @@
 import PageHeader from "@/components/common/PageHeader";
 import Spacer from "@/components/common/Spacer";
+import GradeList from "@/components/dashboard/grades-meet/GradeList";
+import MeetList from "@/components/dashboard/grades-meet/MeetList";
 import { getAllMeetsForStudent } from "@/services/meet-service";
 import { getAllInfoForStudentByPage } from "@/services/student-info-service";
 
