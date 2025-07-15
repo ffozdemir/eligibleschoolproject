@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { isLater, isTimeValid } from "../date-time";
 import { isStringArray } from "../misc";
 
-export const MeetSchema = Yup.object({
+export const meetSchema = Yup.object({
 	date: Yup.date()
 		.typeError("Invalid date")
 		.min(new Date(), "Invalid date")
