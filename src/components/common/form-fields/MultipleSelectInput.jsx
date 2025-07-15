@@ -1,3 +1,4 @@
+"use client";
 import { MultiSelect } from "primereact/multiselect";
 import React, { useState } from "react";
 import { FormControl, FormGroup, FormLabel } from "react-bootstrap";
