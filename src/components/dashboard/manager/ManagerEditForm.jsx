@@ -9,20 +9,19 @@ import {
   MaskedInput,
   PasswordInput,
   SubmitButton,
+  BackButton,
 } from "@/components/common/form-fields";
-import BackButton from "@/components/common/form-fields/BackButton";
 
 import { appConfig } from "@/helpers/config";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-import { useActionState } from "react";
+import React, { useEffect, useActionState } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
-const ManagerEditForm = ({user}) => {
+const ManagerEditForm = ({ user }) => {
   const [state, formAction, isLoading] = useActionState(
     updateManagerAction,
-    {data: user} // Initialize with user data
+    { data: user } // Initialize with user data
   );
   const router = useRouter();
 

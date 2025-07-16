@@ -15,7 +15,7 @@ const LoginForm = () => {
         <Col md={8} lg={6}>
           <Card>
             <Card.Body>
-              <h4>Please enter zour username and password</h4>
+              <h4>Please enter your username and password</h4>
               {!state.ok && state.message && (
                 <Alert variant="danger">{state.message}</Alert>
               )}

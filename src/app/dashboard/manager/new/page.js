@@ -9,7 +9,7 @@ const Page = () => {
     <>
       <PageHeader title="New Manager" />
       <Spacer />
-     <ManagerCreateForm/>
+      <ManagerCreateForm />
       <Spacer />
     </>
   );

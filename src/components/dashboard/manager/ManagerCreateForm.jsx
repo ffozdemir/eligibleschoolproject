@@ -9,15 +9,14 @@ import {
   MaskedInput,
   PasswordInput,
   SubmitButton,
+  BackButton,
 } from "@/components/common/form-fields";
-import BackButton from "@/components/common/form-fields/BackButton";
 
 import { appConfig } from "@/helpers/config";
 import { initialState } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-import { useActionState } from "react";
+import React, { useEffect, useActionState } from "react";
 import { ButtonGroup, Form } from "react-bootstrap";
 
 const ManagerCreateForm = () => {

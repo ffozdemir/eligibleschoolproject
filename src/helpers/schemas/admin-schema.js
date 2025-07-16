@@ -8,10 +8,8 @@ export const adminSchema = Yup.object({
     .typeError("Invalid date format")
     .max(new Date(), "Birth date cannot be in the future")
     .required("Birth date is required"),
-
   birthPlace: Yup.string()
     .min(4, "Too short")
-
     .max(15, "Too long")
     .required("Birth place is required"),
   gender: Yup.string()
