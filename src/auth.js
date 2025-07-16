@@ -43,13 +43,11 @@ const authConfig = {
         } else if (isInDashboardPages) {
           const isUserAuthorized = getIsUserAuthorized(userRole, pathname); //check if the user is authorized to access the dashboard pages
           if (!isUserAuthorized) {
-            const url = `${origin}/unauthorized`;
-            return NextResponse.redirect(url); //if the user is not authorized, redirect to the unauthorized page
+            return NextResponse.redirect(`${origin}/unauthorized`); //if the user is not authorized, redirect to the unauthorized page
           }
         }
       } else if (isInDashboardPages) {
-        NextResponse.redirect(`${origin}/login?callbackUrl=${pathname}`); //if the user is not authenticated and is in the dashboard pages, redirect to the login page with the callback URL
-        return false;
+        return NextResponse.redirect(`${origin}/login`); //if the user is not authenticated and is in the dashboard pages, redirect to the login page with the callback URL
       }
       return true;
     },
@@ -66,13 +64,16 @@ const authConfig = {
         return NextResponse.redirect("/login"); //if the access token is not valid, redirect to the login page
       }
 
-      session.user = user; //set the user data in the session
       session.accessToken = accessToken; //set the access token in the session
+      session.user = user; //set the user data in the session
       return session; //return the session
     },
   },
   pages: {
     signIn: "/login",
+  },
+  session: {
+    strategy: "jwt", // use JWT for session management
   },
   trustHost: true, // if you are using a custom domain, set this to true
 };
